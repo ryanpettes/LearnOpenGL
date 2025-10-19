@@ -1,0 +1,19 @@
+# Build folders
+/build/
+
+# CMake-generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cbp
+*.sln
+
+# Compiled binaries and object files
+*.o
+*.obj
+hello_window
+
+# MacOS specific files
+.DS_Store
+Thumbs.db
