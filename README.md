@@ -5,7 +5,7 @@ This is a repository to document my progress as I learn modern OpenGL using **C+
 ### Progress
 
 <details>
-  <summary><b>Getting Started</b></summary>
+  <summary><b>Getting Started</b> <i>(<-- I'm here)</i></summary>
 
 - [x] Hello Window
 - [x] Hello Triangle
