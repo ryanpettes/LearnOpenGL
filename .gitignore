@@ -1,5 +1,8 @@
-# Build folders
+# Build folders/artifacts
 /build/
+*.exe
+*.out
+*.log
 
 # CMake-generated files
 CMakeFiles/
@@ -17,3 +20,7 @@ hello_window
 # MacOS specific files
 .DS_Store
 Thumbs.db
+
+#VSCode settings
+.vscode/
+.idea/
