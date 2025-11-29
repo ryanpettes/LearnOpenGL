@@ -9,7 +9,7 @@ This is a repository to document my progress as I learn modern OpenGL using **C+
 
 - [x] Hello Window
 - [x] Hello Triangle
-- [ ] Shaders
+- [x] Shaders
 - [ ] Textures
 - [ ] Transformations
 - [ ] Coordinate Systems
