@@ -120,18 +120,23 @@ Each folder contains the source code _(if any)_ at the end-of-tutorial stage, ac
 
 ### Setup
 
-To build and run examples _(hopefully this is correct, if not let me know and I'll look into it)_:
+Provided below is a method to build executables from each lesson, all at once. Then, you may run the **latest** version of `main.cpp` _(where I'm currently at)_, or run executables from the end of specific lesson. Note that, in some of these lessons, the executables might not be exactly what is achieved by the end of the lesson... in some cases, I decided to keep experimenting to see what other cool things I could do with the knowledge gained up to that point.
+
+To build these executables:
 
 ```bash
   mkdir build && cd build
   cmake ..
   make
-  ./hello_window
 ```
+
+Run a simple `ls` command to see all of the executables available _(they should be named to match the corresponding tutorial name)_. To run the latest version, use `latest`.
+
+As of right now, I do not provide a way to run the code in any of the `Exercises/` subdirectories. However, feel free to inspect the code. I made sure to comment at the top of each file what the code accomplishes.
 
 ### Resources
 
 I will update this as I come across new learning materials, but for now this is a list of all the materials I've found helpful so far:
 
 - [LearnOpenGL.com](https://learnopengl.com) — main tutorial series
-- [TheCherno's OpenGL YouTube Playlist](https://www.youtube.com/playlist?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) — great video supplement for visual learners
+- [TheCherno's OpenGL YouTube Playlist](https://www.youtube.com/playlist?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2) — great video supplement to hear concepts explained by someone who's incredibly passionate about the subject

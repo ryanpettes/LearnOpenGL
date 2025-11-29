@@ -10,25 +10,20 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // Shader sources
-const char *vertexShaderSource = "#version 330 core\n"
-                                 "layout (location = 0) in vec3 aPos;\n"
-                                 "\n"
-                                 "out vec4 vertexColor;\n"
-                                 "\n"
-                                 "void main()\n"
-                                 "{\n"
-                                 "   gl_Position = vec4(aPos, 1.0);\n"
-                                 "   vertexColor = vec4(0.5, 0.0, 0.0, 1.0);\n"
-                                 "}\0";
-const char *fragmentShaderSource = "#version 330 core\n"
-                                   "out vec4 FragColor;\n"
-                                   "\n"
-                                   "uniform vec4 ourColor;\n"
-                                   "\n"
-                                   "void main()\n"
-                                   "{\n"
-                                   "   FragColor = ourColor;\n"
-                                   "}\n\0";
+const char *vertexShaderSource =
+    "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "void main()\n"
+    "{\n"
+    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "}\0";
+const char *fragmentShaderSource =
+    "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "}\n\0";
 
 int main() {
   // --- Initialize GLFW ---
@@ -114,9 +109,14 @@ int main() {
   // --- Set up vertex data and buffers ---
   // ===============================================================================
   float vertices[] = {
+      0.5f,  0.5f,  0.0f, // top right
       0.5f,  -0.5f, 0.0f, // bottom right
       -0.5f, -0.5f, 0.0f, // bottom left
-      0.0f,  0.5f,  0.0f  // top
+      -0.5f, 0.5f,  0.0f  // top left
+  };
+  unsigned int indices[] = {
+      0, 1, 3, // first triangle
+      1, 2, 3  // second triangle
   };
 
   // 1. Generate and bind a Vertex Array Object (VAO)
@@ -132,6 +132,14 @@ int main() {
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,
                GL_STATIC_DRAW); // Copy vertex data to buffer
 
+  // 3. Generate and bind an Element Buffer Object (EBO)
+  unsigned int EBO;
+  glGenBuffers(1, &EBO); // Generate 1 buffer, storing id in EBO
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,
+               EBO); // Bind the buffer to the GL_ELEMENT_ARRAY_BUFFER target
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
+               GL_STATIC_DRAW); // Copy index data to buffer
+
   // --- Link vertex attributes ---
   // ===============================================================================
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
@@ -144,19 +152,13 @@ int main() {
   while (!glfwWindowShouldClose(window)) {
     processInput(window);
 
-    // Background color
     glClearColor(0.1f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // Oscillating green color
-    float time = glfwGetTime();
-    float greenValue = (sin(time) / 2.0f) + 0.5f; // greenValue in [0, 1.0]
-    int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
     glUseProgram(shaderProgram);
-    glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 0.0f);
-
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    // glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
